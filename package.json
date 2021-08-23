@@ -1,0 +1,42 @@
+{
+  "name": "action-docker-env-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/**/*.ts",
+    "package": "ncc build --source-map",
+    "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henrique502/action-docker-env-config.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/henrique502/action-docker-env-config/issues"
+  },
+  "homepage": "https://github.com/henrique502/action-docker-env-config#readme",
+  "dependencies": {
+    "@actions/core": "^1.5.0",
+    "@actions/github": "^5.0.0",
+    "install": "^0.13.0",
+    "npm": "^7.21.0",
+    "semver": "^7.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.1",
+    "@types/semver": "^7.3.8",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "@vercel/ncc": "^0.29.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^13.0.0",
+    "typescript": "^4.3.5"
+  }
+}
