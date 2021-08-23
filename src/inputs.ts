@@ -4,7 +4,7 @@ import semver from 'semver/functions/valid';
 import { Environment, InputData } from './types';
 
 const getEnvironment = (): Environment => {
-  const val = core.getInput('environment');
+  const val = core.getInput('environment', { required: true });
 
   switch (val) {
     case Environment.Stage:
@@ -24,6 +24,8 @@ const getEnvironment = (): Environment => {
 const inputs = (): InputData => {
   let tag: string | null = null;
   let version: string = '';
+  let chartSourceLocation = core.getInput('chart_source_location', { required: false });
+  const containerRegistry = core.getInput('container_registry', { required: true });
 
   const shortSha = github.context.sha.substring(0, 8);
   const projectSlug = github.context.payload.repository?.name;
@@ -47,14 +49,18 @@ const inputs = (): InputData => {
     throw new ReferenceError('It\'s is mandatory to use the pattern semver in the tag. Example: v1.2.3-stg');
   }
 
+  if (!chartSourceLocation) {
+    chartSourceLocation = 'infrastructure/helm';
+  }
+
   return {
     tag,
     version,
     shortSha,
     projectSlug,
     environment: getEnvironment(),
-    containerRegistry: core.getInput('container_registry'),
-    chartSourceLocation: core.getInput('chart_source_location'),
+    containerRegistry,
+    chartSourceLocation,
   };
 };
 

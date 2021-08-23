@@ -133,7 +133,7 @@ const github = __importStar(__nccwpck_require__(5438));
 const valid_1 = __importDefault(__nccwpck_require__(9601));
 const types_1 = __nccwpck_require__(8164);
 const getEnvironment = () => {
-    const val = core.getInput('environment');
+    const val = core.getInput('environment', { required: true });
     switch (val) {
         case types_1.Environment.Stage:
         case 'stage':
@@ -152,6 +152,8 @@ const inputs = () => {
     var _a;
     let tag = null;
     let version = '';
+    let chartSourceLocation = core.getInput('chart_source_location', { required: false });
+    const containerRegistry = core.getInput('container_registry', { required: true });
     const shortSha = github.context.sha.substring(0, 8);
     const projectSlug = (_a = github.context.payload.repository) === null || _a === void 0 ? void 0 : _a.name;
     if (!projectSlug) {
@@ -169,14 +171,17 @@ const inputs = () => {
     if (!valid_1.default(version)) {
         throw new ReferenceError('It\'s is mandatory to use the pattern semver in the tag. Example: v1.2.3-stg');
     }
+    if (!chartSourceLocation) {
+        chartSourceLocation = 'infrastructure/helm';
+    }
     return {
         tag,
         version,
         shortSha,
         projectSlug,
         environment: getEnvironment(),
-        containerRegistry: core.getInput('container_registry'),
-        chartSourceLocation: core.getInput('chart_source_location'),
+        containerRegistry,
+        chartSourceLocation,
     };
 };
 exports.default = inputs;
