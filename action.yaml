@@ -1,4 +1,5 @@
 name: 'POC Docker Helm Helper'
+description: 'POC de configuração'
 branding:
   icon: 'archive'
   color: 'green'
