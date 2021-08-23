@@ -25,8 +25,13 @@ const inputs = (): InputData => {
   let tag: string | null = null;
   let version: string = '';
 
+  console.info(JSON.stringify(github.context));
+
   const shortSha = github.context.sha.substring(0, 8);
-  const projectSlug: string = github.context.event.repository.name;
+  const projectSlug = github.context.payload.repository?.name;
+  if (!projectSlug) {
+    throw new Error('context.payload.repository.name not found');
+  }
 
   if (github.context.ref.startsWith('refs/tags/')) {
     tag = github.context.ref.replace('refs/tags/', '');
