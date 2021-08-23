@@ -25,7 +25,7 @@ const inputs = (): InputData => {
   let tag: string | null = null;
   let version: string = '';
 
-  console.info(JSON.stringify(github));
+  core.info(JSON.stringify(github));
 
   const shortSha = github.context.sha.substring(0, 8);
   const projectSlug = github.context.payload.repository?.name;
