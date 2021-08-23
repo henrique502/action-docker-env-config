@@ -19,19 +19,19 @@ outputs:
   version:
     description: 'Versão baseada na tag'
   short_sha:
-    description: ''
+    description: 'Short sha'
   project_slug:
-    description: ''
+    description: 'URI do projeto'
   container_registry:
-    description: ''
+    description: 'Endereço do Docker Container Registry'
   container_image:
-    description: ''
+    description: 'Endereço do Docker Container Registry com repositório e tag'
   chart_source_location:
-    description: ''
+    description: 'Diretório do Helm desse repositório'
   chart_target_location:
-    description: ''
+    description: 'Diretório do Helm'
   environment:
-    description: ''
+    description: 'Ambiente alvo'
 runs:
   using: 'node12'
   main: 'dist/index.js'
