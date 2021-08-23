@@ -1,13 +1,37 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'POC Docker Helm Helper'
+branding:
+  icon: 'archive'
+  color: 'green'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  container_registry:
+    description: 'Endereço do Docker Container Registry'
     required: true
-    default: 'World'
+  chart_source_location:
+    description: 'Diretório do Helm desse repositório'
+    required: false
+    default: 'infrastructure/helm'
+  environment:
+    description: 'Ambiente alvo'
+    required: true
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  tag:
+    description: 'Tag do commit'
+  version:
+    description: 'Versão baseada na tag'
+  short_sha:
+    description: ''
+  project_slug:
+    description: ''
+  container_registry:
+    description: ''
+  container_image:
+    description: ''
+  chart_source_location:
+    description: ''
+  chart_target_location:
+    description: ''
+  environment:
+    description: ''
 runs:
   using: 'node12'
   main: 'dist/index.js'
